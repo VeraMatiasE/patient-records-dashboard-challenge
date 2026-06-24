@@ -1,5 +1,5 @@
 import { AppHeader } from "~/shared/layout/AppHeader";
-import { PatientListSection } from "~/features/patients/components/patients/PatientListSection";
+import { PatientListSection } from "~/features/patients/components/PatientListSection";
 import { usePatients } from "~/features/patients/hooks/usePatients";
 import { usePagination } from "~/features/patients/hooks/usePagination";
 
