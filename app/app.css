@@ -1,8 +1,9 @@
 @import "tailwindcss";
+@import "./styles/theme.css" layer(theme);
 
 html,
 body {
-  @apply bg-white;
+  @apply bg-background;
 
   @media (prefers-color-scheme: light) {
     color-scheme: light;
