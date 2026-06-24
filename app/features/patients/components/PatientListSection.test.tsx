@@ -20,7 +20,7 @@ vi.mock("~/shared/ui/EmptyState", () => ({
 }));
 
 describe("PatientListSection", () => {
-  it("should render patients list", () => {
+  it("renders patient grid and pagination on success state", () => {
     render(
       <PatientListSection
         patients={[{ id: "1" } as any]}
@@ -37,7 +37,7 @@ describe("PatientListSection", () => {
     expect(screen.getByTestId("pagination")).toBeInTheDocument();
   });
 
-  it("should show loading text", () => {
+  it("shows loading state and hides grid/pagination", () => {
     render(
       <PatientListSection
         patients={[]}
@@ -51,10 +51,12 @@ describe("PatientListSection", () => {
     );
 
     expect(screen.getByText("Loading…")).toBeInTheDocument();
-    expect(screen.getByTestId("grid")).toBeInTheDocument();
+
+    expect(screen.queryByTestId("grid")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("pagination")).not.toBeInTheDocument();
   });
 
-  it("should show error state", () => {
+  it("shows error state and hides grid/pagination", () => {
     render(
       <PatientListSection
         patients={[]}
@@ -69,9 +71,12 @@ describe("PatientListSection", () => {
 
     expect(screen.getByText("Failed to load patients")).toBeInTheDocument();
     expect(screen.getByText("API failed")).toBeInTheDocument();
+
+    expect(screen.queryByTestId("grid")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("pagination")).not.toBeInTheDocument();
   });
 
-  it("should show empty state when no patients", () => {
+  it("shows empty state when no patients", () => {
     render(
       <PatientListSection
         patients={[]}
@@ -87,7 +92,7 @@ describe("PatientListSection", () => {
     expect(screen.getByText("No patients found")).toBeInTheDocument();
   });
 
-  it("should hide pagination on loading", () => {
+  it("does not show pagination during loading", () => {
     render(
       <PatientListSection
         patients={[]}

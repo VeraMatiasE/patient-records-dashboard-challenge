@@ -43,42 +43,43 @@ type Story = StoryObj<typeof PatientGrid>;
 
 export const Default: Story = {
   args: {
-    loading: false,
     patients,
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
+    onEdit: () => {},
   },
 };
 
 export const SinglePatient: Story = {
   args: {
-    loading: false,
     patients: [patients[0]],
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
+    onEdit: () => {},
   },
 };
 
 export const Empty: Story = {
   args: {
-    loading: false,
     patients: [],
-  },
-};
-
-export const Loading: Story = {
-  args: {
-    loading: true,
-    patients: [],
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
+    onEdit: () => {},
   },
 };
 
 export const ManyPatients: Story = {
   args: {
-    loading: false,
     patients: Array.from({ length: 12 }, (_, index) => ({
       id: String(index + 1),
       name: `Patient ${index + 1}`,
       avatar: `https://i.pravatar.cc/150?img=${(index % 10) + 1}`,
       description: "Generated patient for grid visualization.",
       website: `patient${index + 1}.com`,
-      createdAt: ``,
+      createdAt: "1990-01-01",
     })),
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
+    onEdit: () => {},
   },
 };

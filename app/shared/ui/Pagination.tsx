@@ -1,4 +1,5 @@
 import { PageButton } from "./PageButton";
+import { PaginationNav } from "./PaginationNav";
 
 interface PaginationProps {
   currentPage: number;
@@ -14,10 +15,7 @@ export function Pagination({
   if (totalPages <= 1) return null;
 
   return (
-    <nav
-      className="flex justify-center gap-1.5 mt-8 pt-6 border-t border-border"
-      aria-label="Pagination"
-    >
+    <PaginationNav>
       <PageButton
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -45,6 +43,6 @@ export function Pagination({
       >
         ›
       </PageButton>
-    </nav>
+    </PaginationNav>
   );
 }

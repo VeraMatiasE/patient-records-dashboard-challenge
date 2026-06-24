@@ -2,6 +2,9 @@ import type { Patient } from "~/features/patients/types/patient";
 import { PatientGrid } from "./PatientGrid";
 import { EmptyState } from "~/shared/ui/EmptyState";
 import { Pagination } from "~/shared/ui/Pagination";
+import { SKELETON_COUNT } from "~/shared/constants/skeleton";
+import { Grid } from "~/shared/ui/Grid";
+import { PatientCardSkeleton } from "./PatientCardSkeleton";
 
 interface PatientListSectionProps {
   patients: Patient[];
@@ -44,7 +47,22 @@ export function PatientListSection({
         />
       )}
 
-      {!error && <PatientGrid patients={patients} loading={loading} />}
+      {loading && !error && (
+        <Grid>
+          {Array.from({ length: SKELETON_COUNT }).map((_, i) => (
+            <PatientCardSkeleton key={i} />
+          ))}
+        </Grid>
+      )}
+
+      {!loading && !error && (
+        <PatientGrid
+          patients={patients}
+          isFavorite={() => false}
+          onToggleFavorite={() => {}}
+          onEdit={() => {}}
+        />
+      )}
 
       {!loading && !error && (
         <Pagination
