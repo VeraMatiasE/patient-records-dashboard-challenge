@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+html,
+body {
+  @apply bg-white;
+
+  @media (prefers-color-scheme: light) {
+    color-scheme: light;
+  }
+}
