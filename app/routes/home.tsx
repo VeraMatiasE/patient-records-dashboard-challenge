@@ -1,3 +1,4 @@
+import { PatientsDashboard } from "~/features/patients/pages/PatientsDashboard";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -11,5 +12,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <></>;
+  return <PatientsDashboard />;
 }
