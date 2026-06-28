@@ -24,7 +24,7 @@ export function PatientCardHeader({
         <h3 className="font-semibold text-sm text-text truncate">
           {patient.name}
         </h3>
-        <p className="text-xs text-text-muted mt-0.5">ID #{patient.id}</p>
+        <p className="text-xs text-secondary mt-0.5">ID #{patient.id}</p>
       </div>
 
       <div className="flex items-center gap-1 flex-shrink-0">

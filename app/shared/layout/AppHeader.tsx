@@ -14,7 +14,7 @@ export function AppHeader({ onAddPatient }: AppHeaderProps) {
       <button
         type="button"
         onClick={onAddPatient}
-        className="bg-accent hover:bg-accent-hover text-text-inverse text-xs font-medium px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+        className="bg-accent-strong hover:bg-accent-hover text-text-inverse text-xs font-medium px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
       >
         + Add patient
       </button>

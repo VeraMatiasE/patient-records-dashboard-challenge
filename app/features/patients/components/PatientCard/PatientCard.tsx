@@ -31,6 +31,7 @@ export function PatientCard({
         className="grid transition-all duration-300 ease-in-out"
         style={{ gridTemplateRows: expanded ? "1fr" : "0fr" }}
         aria-hidden={!expanded}
+        inert={!expanded}
       >
         <div className="overflow-hidden">
           <PatientCardDetails patient={patient} />
@@ -40,7 +41,7 @@ export function PatientCard({
       <button
         type="button"
         onClick={() => setExpanded((e) => !e)}
-        className="w-full flex items-center justify-center gap-1 py-2 text-xs text-text-muted border-t border-border hover:bg-surface-hover hover:text-accent transition-colors cursor-pointer"
+        className="w-full flex items-center justify-center gap-1 py-2 text-xs text-text-secondary border-t border-border hover:bg-surface-hover hover:text-accent transition-colors cursor-pointer"
         aria-expanded={expanded}
       >
         {expanded ? "Hide details" : "Show details"}
