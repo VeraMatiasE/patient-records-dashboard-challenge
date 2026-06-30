@@ -23,6 +23,7 @@ describe("usePatientStore", () => {
       patients: [],
       status: "idle",
       error: null,
+      nextId: 1,
     });
 
     vi.clearAllMocks();
@@ -62,7 +63,12 @@ describe("usePatientStore", () => {
   it("should add patient", () => {
     usePatientStore.getState().addPatient(mockPatient);
 
-    expect(usePatientStore.getState().patients).toContain(mockPatient);
+    const patient = usePatientStore.getState().patients[0];
+
+    expect(patient).toMatchObject({
+      ...mockPatient,
+      createdAt: expect.any(String),
+    });
   });
 
   it("should update patient", () => {

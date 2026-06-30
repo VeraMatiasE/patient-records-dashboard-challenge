@@ -14,6 +14,7 @@ interface PatientListSectionProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+  onEdit: (patient: Patient) => void;
 }
 
 export function PatientListSection({
@@ -24,6 +25,7 @@ export function PatientListSection({
   currentPage,
   totalPages,
   onPageChange,
+  onEdit,
 }: PatientListSectionProps) {
   const isEmpty = !loading && !error && patients.length === 0;
 
@@ -60,7 +62,7 @@ export function PatientListSection({
           patients={patients}
           isFavorite={() => false}
           onToggleFavorite={() => {}}
-          onEdit={() => {}}
+          onEdit={onEdit}
         />
       )}
 
