@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { PatientListSection } from "./PatientListSection";
+import type { Patient } from "../types/patient";
 
 vi.mock("./PatientGrid", () => ({
   PatientGrid: () => <div data-testid="grid" />,
@@ -19,19 +20,31 @@ vi.mock("~/shared/ui/EmptyState", () => ({
   ),
 }));
 
+const patient: Patient = {
+  id: "1",
+  name: "John Doe",
+  avatar: "",
+  createdAt: "2026-01-01T00:00:00Z",
+  website: "",
+  description: "",
+};
+
+const defaultProps = {
+  patients: [patient],
+  totalCount: 1,
+  loading: false,
+  error: null,
+  currentPage: 1,
+  totalPages: 1,
+  onPageChange: vi.fn(),
+  onEdit: vi.fn(),
+  onToggleFavorite: vi.fn(),
+  isFavorite: vi.fn(() => false),
+};
+
 describe("PatientListSection", () => {
   it("renders patient grid and pagination on success state", () => {
-    render(
-      <PatientListSection
-        patients={[{ id: "1" } as any]}
-        totalCount={1}
-        loading={false}
-        error={null}
-        currentPage={1}
-        totalPages={1}
-        onPageChange={() => {}}
-      />,
-    );
+    render(<PatientListSection {...defaultProps} />);
 
     expect(screen.getByTestId("grid")).toBeInTheDocument();
     expect(screen.getByTestId("pagination")).toBeInTheDocument();
@@ -40,13 +53,10 @@ describe("PatientListSection", () => {
   it("shows loading state and hides grid/pagination", () => {
     render(
       <PatientListSection
+        {...defaultProps}
         patients={[]}
         totalCount={0}
-        loading={true}
-        error={null}
-        currentPage={1}
-        totalPages={1}
-        onPageChange={() => {}}
+        loading
       />,
     );
 
@@ -59,13 +69,10 @@ describe("PatientListSection", () => {
   it("shows error state and hides grid/pagination", () => {
     render(
       <PatientListSection
+        {...defaultProps}
         patients={[]}
         totalCount={0}
-        loading={false}
         error="API failed"
-        currentPage={1}
-        totalPages={1}
-        onPageChange={() => {}}
       />,
     );
 
@@ -78,15 +85,7 @@ describe("PatientListSection", () => {
 
   it("shows empty state when no patients", () => {
     render(
-      <PatientListSection
-        patients={[]}
-        totalCount={0}
-        loading={false}
-        error={null}
-        currentPage={1}
-        totalPages={1}
-        onPageChange={() => {}}
-      />,
+      <PatientListSection {...defaultProps} patients={[]} totalCount={0} />,
     );
 
     expect(screen.getByText("No patients found")).toBeInTheDocument();
@@ -95,13 +94,10 @@ describe("PatientListSection", () => {
   it("does not show pagination during loading", () => {
     render(
       <PatientListSection
+        {...defaultProps}
         patients={[]}
         totalCount={0}
-        loading={true}
-        error={null}
-        currentPage={1}
-        totalPages={1}
-        onPageChange={() => {}}
+        loading
       />,
     );
 

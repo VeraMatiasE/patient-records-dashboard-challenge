@@ -1,13 +1,15 @@
 import { AppHeader } from "~/shared/layout/AppHeader";
 import { PatientListSection } from "~/features/patients/components/PatientListSection";
 import { usePatients } from "~/features/patients/hooks/usePatients";
-import { usePagination } from "~/features/patients/hooks/usePagination";
-import { useState } from "react";
-import type { NewPatient, Patient } from "../types/patient";
+import { usePagination } from "~/shared/hooks/usePagination";
+import { useMemo, useState } from "react";
+import type { Patient } from "../types/patient";
 import { PatientModal } from "../components/PatientModal";
-import { useToasts } from "../hooks/useToats";
+import { useToasts } from "~/shared/hooks/useToasts";
 import { ToastList } from "~/shared/ui/toast/ToastList";
 import type { PatientFormData } from "../schemas/patient.schema";
+import { useFavorites } from "../hooks/useFavorites";
+import { FavoritesSidebar } from "../components/FavoritesSidebar";
 
 type ModalState =
   | { mode: "create" }
@@ -16,9 +18,11 @@ type ModalState =
 
 export function PatientsDashboard() {
   const { patients, loading, error, addPatient, updatePatient } = usePatients();
-  const { paged, currentPage, totalPages, setPage } = usePagination(patients);
   const [modal, setModal] = useState<ModalState>(null);
   const { toasts, showToast } = useToasts();
+  const { favoriteIds, isFavorite, toggleFavorite } = useFavorites();
+
+  const { paged, currentPage, totalPages, setPage } = usePagination(patients);
 
   function handleSave(data: PatientFormData) {
     if (!modal) return;
@@ -44,11 +48,16 @@ export function PatientsDashboard() {
     }
   }
 
+  const favoritePatients = useMemo(
+    () => patients.filter((p) => favoriteIds.includes(p.id)),
+    [patients, favoriteIds],
+  );
+
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="flex min-h-screen flex-col bg-gray-50 font-sans">
       <AppHeader onAddPatient={() => setModal({ mode: "create" })} />
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 items-start gap-0">
         <PatientListSection
           patients={paged}
           totalCount={patients.length}
@@ -63,6 +72,13 @@ export function PatientsDashboard() {
               patient,
             })
           }
+          isFavorite={isFavorite}
+          onToggleFavorite={toggleFavorite}
+        />
+        <FavoritesSidebar
+          className="hidden lg:block"
+          onRemove={toggleFavorite}
+          patients={favoritePatients}
         />
       </div>
 

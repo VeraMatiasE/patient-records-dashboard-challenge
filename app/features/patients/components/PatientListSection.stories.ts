@@ -52,6 +52,8 @@ export const Default: Story = {
     error: null,
     currentPage: 1,
     totalPages: 5,
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
   },
 };
 
@@ -63,6 +65,8 @@ export const Loading: Story = {
     error: null,
     currentPage: 1,
     totalPages: 1,
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
   },
 };
 
@@ -74,6 +78,8 @@ export const Empty: Story = {
     error: null,
     currentPage: 1,
     totalPages: 1,
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
   },
 };
 
@@ -85,6 +91,8 @@ export const Error: Story = {
     error: "Unable to connect to the API. Please try again later.",
     currentPage: 1,
     totalPages: 1,
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
   },
 };
 
@@ -96,5 +104,7 @@ export const LastPage: Story = {
     error: null,
     currentPage: 15,
     totalPages: 15,
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
   },
 };
