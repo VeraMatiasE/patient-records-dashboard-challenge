@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import type { ReactNode } from "react";
+import { IconButton } from "./buttons/IconButton";
 
 interface ModalProps {
   open: boolean;
@@ -36,14 +37,12 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
             <span />
           )}
 
-          <button
-            type="button"
+          <IconButton
+            icon="×"
+            ariaLabel="Close modal"
             onClick={onClose}
-            aria-label="Close modal"
-            className="w-7 h-7 flex items-center justify-center rounded-[var(--radius-button)] text-text-muted hover:bg-surface-hover transition-colors cursor-pointer"
-          >
-            ×
-          </button>
+            className="w-7 h-7 rounded-lg text-text-muted hover:bg-surface-hover"
+          />
         </div>
 
         <div>{children}</div>
