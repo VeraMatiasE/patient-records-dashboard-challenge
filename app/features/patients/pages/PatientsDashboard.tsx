@@ -10,6 +10,7 @@ import { ToastList } from "~/shared/ui/toast/ToastList";
 import type { PatientFormData } from "../schemas/patient.schema";
 import { useFavorites } from "../hooks/useFavorites";
 import { FavoritesSidebar } from "../components/FavoritesSidebar";
+import { usePatientSearch } from "~/features/patients/hooks/usePatientSearch";
 
 type ModalState =
   | { mode: "create" }
@@ -22,7 +23,23 @@ export function PatientsDashboard() {
   const { toasts, showToast } = useToasts();
   const { favoriteIds, isFavorite, toggleFavorite } = useFavorites();
 
-  const { paged, currentPage, totalPages, setPage } = usePagination(patients);
+  const {
+    search,
+    filter,
+    filteredPatients,
+    totalCount,
+    favoriteCount,
+    handleSearchChange,
+    handleFilterChange,
+  } = usePatientSearch({
+    patients,
+    favoriteIds,
+    onSearchChange: () => setPage(1),
+    onFilterChange: () => setPage(1),
+  });
+
+  const { paged, currentPage, totalPages, setPage } =
+    usePagination(filteredPatients);
 
   function handleSave(data: PatientFormData) {
     if (!modal) return;
@@ -54,15 +71,16 @@ export function PatientsDashboard() {
   );
 
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50 font-sans">
+    <div className="flex min-h-screen flex-col bg-background font-sans">
       <AppHeader onAddPatient={() => setModal({ mode: "create" })} />
 
       <div className="flex flex-1 items-start gap-0">
         <PatientListSection
           patients={paged}
-          totalCount={patients.length}
+          totalCount={totalCount}
           loading={loading}
           error={error}
+          favoriteCount={favoriteCount}
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setPage}
@@ -72,6 +90,10 @@ export function PatientsDashboard() {
               patient,
             })
           }
+          search={search}
+          filter={filter}
+          onSearchChange={handleSearchChange}
+          onFilterChange={handleFilterChange}
           isFavorite={isFavorite}
           onToggleFavorite={toggleFavorite}
         />
@@ -84,7 +106,7 @@ export function PatientsDashboard() {
 
       {modal !== null && (
         <PatientModal
-          open={!!modal}
+          open={modal !== null}
           patient={modal.mode === "edit" ? modal.patient : null}
           onClose={() => setModal(null)}
           onSave={handleSave}

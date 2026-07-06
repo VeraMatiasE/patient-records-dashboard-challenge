@@ -8,3 +8,5 @@ export type Patient = {
 };
 
 export type NewPatient = Omit<Patient, "id" | "createdAt">;
+
+export type PatientFilter = "all" | "favorites";
