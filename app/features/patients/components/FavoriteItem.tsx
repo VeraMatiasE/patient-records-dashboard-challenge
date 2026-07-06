@@ -1,6 +1,7 @@
 import { Avatar } from "~/shared/ui/Avatar";
 import type { Patient } from "~/features/patients/types/patient";
 import { IconButton } from "~/shared/ui/buttons/IconButton";
+import { Icon } from "~/shared/ui/icons/Icon";
 
 interface FavoriteItemProps {
   patient: Patient;
@@ -16,10 +17,10 @@ export function FavoriteItem({ patient, onRemove }: FavoriteItemProps) {
         <p className="text-[10px] text-text-muted">#{patient.id}</p>
       </div>
       <IconButton
-        icon="×"
+        icon={<Icon name="x" className="h-4 w-4" />}
         ariaLabel={`Remove ${patient.name} from favorites`}
         onClick={() => onRemove(patient.id)}
-        className="w-8 h-8 rounded-lg text-sm flex-shrink-0 text-text-muted hover:text-danger"
+        className="flex-shrink-0 text-text-muted hover:text-danger"
       />
     </li>
   );

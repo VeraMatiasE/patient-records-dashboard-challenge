@@ -1,6 +1,7 @@
 import { EmptyState } from "~/shared/ui/EmptyState";
 import type { Patient } from "../types/patient";
 import { FavoriteItem } from "./FavoriteItem";
+import { Icon } from "~/shared/ui/icons/Icon";
 
 interface FavoritesSidebarProps {
   className?: string;
@@ -19,8 +20,13 @@ export function FavoritesSidebar({
     >
       <div className="sticky top-6 flex max-h-[calc(100vh-3rem)] flex-col">
         <div className="shrink-0 border-b border-border p-4">
-          <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-            ★ Favorites
+          <p className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-text-muted select-none">
+            <Icon
+              name="starFilled"
+              className="h-3.5 w-3.5"
+              aria-hidden="true"
+            />
+            Favorites
           </p>
         </div>
 

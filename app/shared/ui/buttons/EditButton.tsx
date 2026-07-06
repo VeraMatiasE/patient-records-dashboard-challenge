@@ -1,12 +1,13 @@
+import { Icon } from "../icons/Icon";
 import { IconButton } from "./IconButton";
 
 export function EditButton({ onClick }: { onClick: () => void }) {
   return (
     <IconButton
-      icon="✎"
+      icon={<Icon name="edit" className="h-4 w-4" />}
       ariaLabel="Edit patient"
       onClick={onClick}
-      className="w-8 h-8 rounded-lg text-text-muted hover:text-accent hover:bg-surface-hover"
+      className="text-text-muted hover:text-accent"
     />
   );
 }

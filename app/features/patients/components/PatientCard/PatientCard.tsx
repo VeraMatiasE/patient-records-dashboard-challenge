@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PatientCardHeader } from "./PatientCardHeader";
 import { PatientCardDetails } from "./PatientCardDetails";
 import type { Patient } from "../../types/patient";
+import { Icon } from "~/shared/ui/icons/Icon";
 
 interface PatientCardProps {
   patient: Patient;
@@ -45,12 +46,13 @@ export function PatientCard({
         aria-expanded={expanded}
       >
         {expanded ? "Hide details" : "Show details"}
-        <span
-          className="transition-transform duration-300"
-          style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)" }}
-        >
-          ▾
-        </span>
+        <Icon
+          name="chevronDown"
+          aria-hidden="true"
+          className={`h-4 w-4 transition-transform duration-300 ${
+            expanded ? "rotate-180" : "rotate-0"
+          }`}
+        />
       </button>
     </article>
   );

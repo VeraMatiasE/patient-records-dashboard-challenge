@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import type { ReactNode } from "react";
 import { IconButton } from "./buttons/IconButton";
+import { Icon } from "./icons/Icon";
 
 interface ModalProps {
   open: boolean;
@@ -38,7 +39,7 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
           )}
 
           <IconButton
-            icon="×"
+            icon={<Icon name="x" className="h-4 w-4" />}
             ariaLabel="Close modal"
             onClick={onClose}
             className="w-7 h-7 rounded-lg text-text-muted hover:bg-surface-hover"
