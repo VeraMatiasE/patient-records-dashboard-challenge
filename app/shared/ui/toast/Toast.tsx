@@ -1,21 +1,30 @@
+import type { IconName } from "../icons";
+import { Icon } from "../icons/Icon";
 import type { ToastItem } from "./toast.types";
 
 interface ToastProps {
   toast: ToastItem;
 }
 
-const variants = {
+const variants: Record<
+  ToastItem["type"],
+  {
+    className: string;
+    icon: IconName;
+    iconLabel: string;
+  }
+> = {
   success: {
     className: "bg-success text-white",
-    icon: "✓",
+    icon: "check",
     iconLabel: "Success",
   },
   error: {
     className: "bg-danger text-white",
-    icon: "✕",
+    icon: "x",
     iconLabel: "Error",
   },
-} as const;
+};
 
 export function Toast({ toast }: ToastProps) {
   const variant = variants[toast.type];
@@ -38,7 +47,7 @@ export function Toast({ toast }: ToastProps) {
       `}
     >
       <span aria-hidden="true" className="text-lg font-bold leading-none">
-        {variant.icon}
+        <Icon name={variant.icon} className="w-5 h-5 flex-shrink-0" />
       </span>
       <p className="flex-1 text-sm font-medium">{toast.message}</p>
     </div>

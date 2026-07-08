@@ -6,6 +6,7 @@ export type IconComponent = ComponentType<IconProps>;
 
 export type IconName =
   | "x"
+  | "check"
   | "star"
   | "starFilled"
   | "edit"
