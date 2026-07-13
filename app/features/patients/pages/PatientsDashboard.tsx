@@ -2,7 +2,7 @@ import { AppHeader } from "~/shared/layout/AppHeader";
 import { PatientListSection } from "~/features/patients/components/PatientListSection";
 import { usePatients } from "~/features/patients/hooks/usePatients";
 import { usePagination } from "~/shared/hooks/usePagination";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { Patient } from "../types/patient";
 import { PatientModal } from "../components/PatientModal";
 import { useToasts } from "~/shared/hooks/useToasts";
@@ -11,6 +11,9 @@ import type { PatientFormData } from "../schemas/patient.schema";
 import { useFavorites } from "../hooks/useFavorites";
 import { FavoritesSidebar } from "../components/FavoritesSidebar";
 import { usePatientSearch } from "~/features/patients/hooks/usePatientSearch";
+import { PAGE_SIZE } from "~/shared/constants/pagination";
+import { usePatientNavigator } from "~/features/patients/hooks/usePatientNavigator";
+import { getPageFromIndex } from "~/shared/utils/pagination.utils";
 
 type ModalState =
   | { mode: "create" }
@@ -40,6 +43,24 @@ export function PatientsDashboard() {
 
   const { paged, currentPage, totalPages, setPage } =
     usePagination(filteredPatients);
+
+  const resolvePage = useCallback(
+    (id: string) => {
+      const index = filteredPatients.findIndex((patient) => patient.id === id);
+
+      if (index === -1) {
+        return null;
+      }
+
+      return getPageFromIndex(index, PAGE_SIZE);
+    },
+    [filteredPatients],
+  );
+
+  const { focusPatient, highlightedId, register } = usePatientNavigator({
+    resolvePage,
+    setPage,
+  });
 
   function handleSave(data: PatientFormData) {
     if (!modal) return;
@@ -82,6 +103,8 @@ export function PatientsDashboard() {
           error={error}
           favoriteCount={favoriteCount}
           currentPage={currentPage}
+          highlightedId={highlightedId}
+          register={register}
           totalPages={totalPages}
           onPageChange={setPage}
           onEdit={(patient) =>
@@ -100,6 +123,7 @@ export function PatientsDashboard() {
         <FavoritesSidebar
           className="hidden lg:block"
           onRemove={toggleFavorite}
+          onSelect={focusPatient}
           patients={favoritePatients}
         />
       </div>

@@ -6,11 +6,19 @@ import { Icon } from "~/shared/ui/icons/Icon";
 interface FavoriteItemProps {
   patient: Patient;
   onRemove: (id: string) => void;
+  onClick: () => void;
 }
 
-export function FavoriteItem({ patient, onRemove }: FavoriteItemProps) {
+export function FavoriteItem({
+  patient,
+  onRemove,
+  onClick,
+}: FavoriteItemProps) {
   return (
-    <li className="flex items-center gap-2 px-1.5 py-1.5 rounded-[var(--radius-button)] hover:bg-surface-hover transition-colors">
+    <li
+      onClick={onClick}
+      className="flex cursor-pointer select-none items-center gap-2 px-1.5 py-1.5 rounded-[var(--radius-button)] hover:bg-surface-hover transition-colors"
+    >
       <Avatar src={patient.avatar} name={patient.name} size="sm" />
       <div className="flex-1 min-w-0">
         <p className="text-xs font-medium text-text truncate">{patient.name}</p>

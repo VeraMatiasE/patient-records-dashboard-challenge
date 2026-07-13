@@ -38,13 +38,14 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className="flex h-screen justify-end bg-gray-50">
+      <div className="flex h-screen justify-end bg-background">
         <Story />
       </div>
     ),
   ],
   args: {
     onRemove: () => {},
+    onSelect: () => {},
   },
 } satisfies Meta<typeof FavoritesSidebar>;
 
@@ -64,6 +65,7 @@ export const WithFavorites: Story = {
 
     return (
       <FavoritesSidebar
+        {...args}
         patients={patients}
         onRemove={(id) =>
           setPatients((prev) => prev.filter((p) => p.id !== id))

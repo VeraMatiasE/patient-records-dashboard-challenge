@@ -36,6 +36,16 @@ const meta: Meta<typeof PatientListSection> = {
     layout: "fullscreen",
   },
   args: {
+    search: "",
+    filter: "all",
+    favoriteCount: 0,
+    highlightedId: null,
+    register: () => () => {},
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
+    onEdit: () => {},
+    onSearchChange: () => {},
+    onFilterChange: () => {},
     onPageChange: () => {},
   },
 };
@@ -52,8 +62,6 @@ export const Default: Story = {
     error: null,
     currentPage: 1,
     totalPages: 5,
-    isFavorite: () => false,
-    onToggleFavorite: () => {},
   },
 };
 
@@ -65,8 +73,6 @@ export const Loading: Story = {
     error: null,
     currentPage: 1,
     totalPages: 1,
-    isFavorite: () => false,
-    onToggleFavorite: () => {},
   },
 };
 
@@ -78,8 +84,6 @@ export const Empty: Story = {
     error: null,
     currentPage: 1,
     totalPages: 1,
-    isFavorite: () => false,
-    onToggleFavorite: () => {},
   },
 };
 
@@ -91,8 +95,6 @@ export const Error: Story = {
     error: "Unable to connect to the API. Please try again later.",
     currentPage: 1,
     totalPages: 1,
-    isFavorite: () => false,
-    onToggleFavorite: () => {},
   },
 };
 
@@ -104,7 +106,41 @@ export const LastPage: Story = {
     error: null,
     currentPage: 15,
     totalPages: 15,
-    isFavorite: () => false,
-    onToggleFavorite: () => {},
+  },
+};
+
+export const WithSearch: Story = {
+  args: {
+    patients: [patients[0]],
+    search: "john",
+    totalCount: 1,
+    loading: false,
+    error: null,
+    currentPage: 1,
+    totalPages: 1,
+  },
+};
+export const FavoritesFilter: Story = {
+  args: {
+    patients,
+    filter: "favorites",
+    favoriteCount: 3,
+    totalCount: 3,
+    loading: false,
+    error: null,
+    currentPage: 1,
+    totalPages: 1,
+    isFavorite: () => true,
+  },
+};
+export const HighlightedPatient: Story = {
+  args: {
+    patients,
+    highlightedId: "2",
+    totalCount: 3,
+    loading: false,
+    error: null,
+    currentPage: 1,
+    totalPages: 1,
   },
 };

@@ -12,6 +12,7 @@ export function useFavorites() {
 
   return {
     favoriteIds,
+    favoriteCount: favoriteIds.length,
     toggleFavorite,
     isFavorite,
   };

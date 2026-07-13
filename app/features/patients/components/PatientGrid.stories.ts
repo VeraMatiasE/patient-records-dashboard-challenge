@@ -35,6 +35,13 @@ const meta: Meta<typeof PatientGrid> = {
   parameters: {
     layout: "padded",
   },
+  args: {
+    highlightedId: null,
+    register: () => () => {},
+    isFavorite: () => false,
+    onToggleFavorite: () => {},
+    onEdit: () => {},
+  },
 };
 
 export default meta;
@@ -44,27 +51,18 @@ type Story = StoryObj<typeof PatientGrid>;
 export const Default: Story = {
   args: {
     patients,
-    isFavorite: () => false,
-    onToggleFavorite: () => {},
-    onEdit: () => {},
   },
 };
 
 export const SinglePatient: Story = {
   args: {
     patients: [patients[0]],
-    isFavorite: () => false,
-    onToggleFavorite: () => {},
-    onEdit: () => {},
   },
 };
 
 export const Empty: Story = {
   args: {
     patients: [],
-    isFavorite: () => false,
-    onToggleFavorite: () => {},
-    onEdit: () => {},
   },
 };
 
@@ -82,4 +80,8 @@ export const ManyPatients: Story = {
     onToggleFavorite: () => {},
     onEdit: () => {},
   },
+};
+
+export const HighlightedPatient: Story = {
+  args: { patients, highlightedId: "2" },
 };

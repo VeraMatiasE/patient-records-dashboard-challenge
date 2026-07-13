@@ -7,12 +7,14 @@ interface FavoritesSidebarProps {
   className?: string;
   patients: Patient[];
   onRemove: (id: string) => void;
+  onSelect: (id: string) => void;
 }
 
 export function FavoritesSidebar({
   className,
   patients,
   onRemove,
+  onSelect,
 }: FavoritesSidebarProps) {
   return (
     <aside
@@ -40,7 +42,12 @@ export function FavoritesSidebar({
           ) : (
             <ul className="space-y-0.5">
               {patients.map((p) => (
-                <FavoriteItem key={p.id} patient={p} onRemove={onRemove} />
+                <FavoriteItem
+                  key={p.id}
+                  patient={p}
+                  onRemove={onRemove}
+                  onClick={() => onSelect(p.id)}
+                />
               ))}
             </ul>
           )}
