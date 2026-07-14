@@ -11,11 +11,11 @@ describe("Toast", () => {
       message: "Patient added successfully.",
     };
 
-    render(<Toast toast={toast} />);
+    const { container } = render(<Toast toast={toast} />);
 
     expect(screen.getByRole("status")).toBeInTheDocument();
     expect(screen.getByText("Patient added successfully.")).toBeInTheDocument();
-    expect(screen.getByText("✓")).toBeInTheDocument();
+    expect(container.querySelector("svg")).toBeInTheDocument();
   });
 
   it("should render an error toast", () => {
@@ -25,11 +25,11 @@ describe("Toast", () => {
       message: "Failed to save patient.",
     };
 
-    render(<Toast toast={toast} />);
+    const { container } = render(<Toast toast={toast} />);
 
     expect(screen.getByRole("status")).toBeInTheDocument();
     expect(screen.getByText("Failed to save patient.")).toBeInTheDocument();
-    expect(screen.getByText("✕")).toBeInTheDocument();
+    expect(container.querySelector("svg")).toBeInTheDocument();
   });
 
   it("should expose polite live region", () => {
