@@ -8,6 +8,7 @@ const meta = {
   parameters: {
     layout: "centered",
   },
+  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-[28rem] rounded-[var(--radius-card)] border border-border bg-surface shadow">

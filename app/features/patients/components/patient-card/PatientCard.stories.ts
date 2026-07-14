@@ -23,6 +23,7 @@ const meta: Meta<typeof PatientCard> = {
     onToggleFavorite: () => {},
     onEdit: () => {},
   },
+  tags: ["autodocs"],
 };
 
 export default meta;

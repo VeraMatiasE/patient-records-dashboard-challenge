@@ -4,6 +4,7 @@ import { PatientCardSkeleton } from "./PatientCardSkeleton";
 const meta: Meta<typeof PatientCardSkeleton> = {
   title: "Patients/PatientCardSkeleton",
   component: PatientCardSkeleton,
+  tags: ["autodocs"],
   parameters: {
     layout: "centered",
   },

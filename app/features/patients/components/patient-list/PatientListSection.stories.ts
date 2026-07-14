@@ -48,6 +48,7 @@ const meta: Meta<typeof PatientListSection> = {
     onFilterChange: () => {},
     onPageChange: () => {},
   },
+  tags: ["autodocs"],
 };
 
 export default meta;

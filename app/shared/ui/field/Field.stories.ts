@@ -19,6 +19,7 @@ const meta = {
       action: "changed",
     },
   },
+  tags: ["autodocs"],
 } satisfies Meta<typeof Field>;
 
 export default meta;

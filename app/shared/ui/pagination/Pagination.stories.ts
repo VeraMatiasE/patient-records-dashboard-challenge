@@ -11,6 +11,7 @@ const meta: Meta<typeof Pagination> = {
   args: {
     onPageChange: fn(),
   },
+  tags: ["autodocs"],
 };
 
 export default meta;

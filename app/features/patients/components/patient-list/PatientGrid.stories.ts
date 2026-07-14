@@ -42,6 +42,7 @@ const meta: Meta<typeof PatientGrid> = {
     onToggleFavorite: () => {},
     onEdit: () => {},
   },
+  tags: ["autodocs"],
 };
 
 export default meta;

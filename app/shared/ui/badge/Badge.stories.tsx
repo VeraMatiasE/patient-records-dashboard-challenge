@@ -20,6 +20,7 @@ const meta = {
       options: ["neutral", "primary", "success", "danger"],
     },
   },
+  tags: ["autodocs"],
 } satisfies Meta<typeof Badge>;
 
 export default meta;

@@ -4,7 +4,7 @@ import { PatientFilterSelector } from "./PatientFilterSelector";
 import { fn } from "storybook/test";
 
 const meta = {
-  title: "Shared/PatientFilterSelector",
+  title: "Patients/PatientFilterSelector",
   component: PatientFilterSelector,
   parameters: {
     layout: "centered",
@@ -12,6 +12,7 @@ const meta = {
   args: {
     onChange: fn(),
   },
+  tags: ["autodocs"],
 } satisfies Meta<typeof PatientFilterSelector>;
 
 export default meta;

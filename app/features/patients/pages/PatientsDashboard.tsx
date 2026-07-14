@@ -9,11 +9,12 @@ import { useToasts } from "~/shared/hooks/useToasts";
 import { ToastList } from "~/shared/ui/toast/ToastList";
 import type { PatientFormData } from "../schemas/patient.schema";
 import { useFavorites } from "../hooks/useFavorites";
-import { FavoritesSidebar } from "../components/favorites/FavoritesSidebar/FavoritesSidebar";
 import { usePatientSearch } from "~/features/patients/hooks/usePatientSearch";
 import { PAGE_SIZE } from "~/shared/constants/pagination";
 import { usePatientNavigator } from "~/features/patients/hooks/usePatientNavigator";
 import { getPageFromIndex } from "~/shared/utils/pagination.utils";
+import { FavoritesDrawer } from "../components/favorites/FavoritesDrawer/FavoritesDrawer";
+import { useDisclosure } from "~/shared/hooks/useDisclosure";
 
 type ModalState =
   | { mode: "create" }
@@ -25,6 +26,7 @@ export function PatientsDashboard() {
   const [modal, setModal] = useState<ModalState>(null);
   const { toasts, showToast } = useToasts();
   const { favoriteIds, isFavorite, toggleFavorite } = useFavorites();
+  const favoritesDrawer = useDisclosure();
 
   const {
     search,
@@ -91,9 +93,18 @@ export function PatientsDashboard() {
     [patients, favoriteIds],
   );
 
+  function handleSelectFavorite(id: string) {
+    focusPatient(id);
+    favoritesDrawer.onClose();
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-background font-sans">
-      <AppHeader onAddPatient={() => setModal({ mode: "create" })} />
+      <AppHeader
+        onAddPatient={() => setModal({ mode: "create" })}
+        favoriteCount={favoriteCount}
+        onOpenFavorites={favoritesDrawer.onOpen}
+      />
 
       <div className="flex flex-1 items-start gap-0">
         <PatientListSection
@@ -120,12 +131,6 @@ export function PatientsDashboard() {
           isFavorite={isFavorite}
           onToggleFavorite={toggleFavorite}
         />
-        <FavoritesSidebar
-          className="hidden lg:block"
-          onRemove={toggleFavorite}
-          onSelect={focusPatient}
-          patients={favoritePatients}
-        />
       </div>
 
       {modal !== null && (
@@ -136,6 +141,14 @@ export function PatientsDashboard() {
           onSave={handleSave}
         />
       )}
+
+      <FavoritesDrawer
+        open={favoritesDrawer.isOpen}
+        onClose={favoritesDrawer.onClose}
+        patients={favoritePatients}
+        onRemove={toggleFavorite}
+        onSelect={handleSelectFavorite}
+      />
 
       <ToastList toasts={toasts} />
     </div>

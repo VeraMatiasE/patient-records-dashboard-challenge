@@ -20,8 +20,7 @@ export const PatientCard = forwardRef<HTMLElement, PatientCardProps>(
       <article
         ref={ref}
         className={`bg-surface border border-border rounded-xl overflow-hidden transition-colors hover:border-border-hover shadow-card hover:shadow-card-hover ${
-          highlighted &&
-          "ring-2 ring-2 ring-primary shadow-lg shadow-primary/20 transition-all"
+          highlighted ? "ring-2 ring-primary shadow-lg shadow-primary/20" : ""
         }`}
       >
         <PatientCardHeader
