@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { PatientCard } from "./PatientCard";
 
-vi.mock("~/shared/ui/Avatar", () => ({
+vi.mock("~/shared/ui/avatar/Avatar", () => ({
   Avatar: () => <div data-testid="avatar" />,
 }));
 
@@ -16,16 +16,17 @@ const patient = {
   createdAt: "2024-01-01",
 };
 
+const defaultProps = {
+  patient,
+  isFavorite: false,
+  highlighted: false,
+  onToggleFavorite: vi.fn(),
+  onEdit: vi.fn(),
+};
+
 describe("PatientCard", () => {
   it("renders patient info correctly", () => {
-    render(
-      <PatientCard
-        patient={patient}
-        isFavorite={false}
-        onToggleFavorite={vi.fn()}
-        onEdit={vi.fn()}
-      />,
-    );
+    render(<PatientCard {...defaultProps} />);
 
     expect(screen.getByText("John Doe")).toBeInTheDocument();
     expect(screen.getByText("ID #1")).toBeInTheDocument();
@@ -33,12 +34,7 @@ describe("PatientCard", () => {
 
   it("does not render website when empty", () => {
     render(
-      <PatientCard
-        patient={{ ...patient, website: "" }}
-        isFavorite={false}
-        onToggleFavorite={vi.fn()}
-        onEdit={vi.fn()}
-      />,
+      <PatientCard {...defaultProps} patient={{ ...patient, website: "" }} />,
     );
 
     expect(screen.queryByText(/webpage/i)).not.toBeInTheDocument();
@@ -47,14 +43,7 @@ describe("PatientCard", () => {
   it("toggles expanded state correctly", async () => {
     const user = userEvent.setup();
 
-    render(
-      <PatientCard
-        patient={patient}
-        isFavorite={false}
-        onToggleFavorite={vi.fn()}
-        onEdit={vi.fn()}
-      />,
-    );
+    render(<PatientCard {...defaultProps} />);
 
     const toggleButton = screen.getByRole("button", {
       name: /show details/i,
@@ -72,10 +61,8 @@ describe("PatientCard", () => {
   it("shows fallback description when empty", () => {
     render(
       <PatientCard
+        {...defaultProps}
         patient={{ ...patient, description: "" }}
-        isFavorite={false}
-        onToggleFavorite={vi.fn()}
-        onEdit={vi.fn()}
       />,
     );
 
@@ -87,12 +74,7 @@ describe("PatientCard", () => {
     const onToggleFavorite = vi.fn();
 
     render(
-      <PatientCard
-        patient={patient}
-        isFavorite={false}
-        onToggleFavorite={onToggleFavorite}
-        onEdit={vi.fn()}
-      />,
+      <PatientCard {...defaultProps} onToggleFavorite={onToggleFavorite} />,
     );
 
     const favButton = screen.getByRole("button", {
@@ -108,14 +90,7 @@ describe("PatientCard", () => {
     const user = userEvent.setup();
     const onEdit = vi.fn();
 
-    render(
-      <PatientCard
-        patient={patient}
-        isFavorite={false}
-        onToggleFavorite={vi.fn()}
-        onEdit={onEdit}
-      />,
-    );
+    render(<PatientCard {...defaultProps} onEdit={onEdit} />);
 
     const editButton = screen.getByRole("button", {
       name: /edit patient/i,
@@ -124,5 +99,11 @@ describe("PatientCard", () => {
     await user.click(editButton);
 
     expect(onEdit).toHaveBeenCalledWith(patient);
+  });
+
+  it("applies highlight styles when highlighted is true", () => {
+    render(<PatientCard {...defaultProps} highlighted />);
+
+    expect(screen.getByRole("article")).toHaveClass("ring-2");
   });
 });

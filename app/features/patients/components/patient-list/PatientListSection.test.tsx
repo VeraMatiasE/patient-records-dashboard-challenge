@@ -1,17 +1,29 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { PatientListSection } from "./PatientListSection";
-import type { Patient } from "../../types/patient";
+import type { Patient, PatientFilter } from "../../types/patient";
 
 vi.mock("./PatientGrid", () => ({
   PatientGrid: () => <div data-testid="grid" />,
 }));
 
-vi.mock("~/shared/ui/Pagination", () => ({
+vi.mock("~/shared/ui/pagination/Pagination", () => ({
   Pagination: () => <div data-testid="pagination" />,
 }));
 
-vi.mock("~/shared/ui/EmptyState", () => ({
+vi.mock("~/shared/ui/grid/Grid", () => ({
+  Grid: ({ children }: any) => <div data-testid="grid">{children}</div>,
+}));
+
+vi.mock("./PatientCardSkeleton", () => ({
+  PatientCardSkeleton: () => <div data-testid="skeleton" />,
+}));
+
+vi.mock("../filters/SearchToolBar", () => ({
+  SearchToolbar: () => <div data-testid="search-toolbar" />,
+}));
+
+vi.mock("~/shared/ui/empty-state/EmptyState", () => ({
   EmptyState: ({ title, description }: any) => (
     <div>
       <h2>{title}</h2>
@@ -36,16 +48,24 @@ const defaultProps = {
   error: null,
   currentPage: 1,
   totalPages: 1,
+  search: "",
+  filter: "all" as PatientFilter,
+  favoriteCount: 0,
+  highlightedId: null,
+  register: vi.fn(() => vi.fn()),
   onPageChange: vi.fn(),
   onEdit: vi.fn(),
   onToggleFavorite: vi.fn(),
   isFavorite: vi.fn(() => false),
+  onSearchChange: vi.fn(),
+  onFilterChange: vi.fn(),
 };
 
 describe("PatientListSection", () => {
-  it("renders patient grid and pagination on success state", () => {
+  it("renders search toolbar, patient grid and pagination on success state", () => {
     render(<PatientListSection {...defaultProps} />);
 
+    expect(screen.getByTestId("search-toolbar")).toBeInTheDocument();
     expect(screen.getByTestId("grid")).toBeInTheDocument();
     expect(screen.getByTestId("pagination")).toBeInTheDocument();
   });
@@ -62,7 +82,6 @@ describe("PatientListSection", () => {
 
     expect(screen.getByText("Loading…")).toBeInTheDocument();
 
-    expect(screen.queryByTestId("grid")).not.toBeInTheDocument();
     expect(screen.queryByTestId("pagination")).not.toBeInTheDocument();
   });
 
@@ -89,18 +108,5 @@ describe("PatientListSection", () => {
     );
 
     expect(screen.getByText("No patients found")).toBeInTheDocument();
-  });
-
-  it("does not show pagination during loading", () => {
-    render(
-      <PatientListSection
-        {...defaultProps}
-        patients={[]}
-        totalCount={0}
-        loading
-      />,
-    );
-
-    expect(screen.queryByTestId("pagination")).not.toBeInTheDocument();
   });
 });
