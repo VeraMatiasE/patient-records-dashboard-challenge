@@ -9,7 +9,7 @@ interface IconButtonProps extends Omit<
   icon: React.ReactNode;
   ariaLabel: string;
   size?: IconButtonSize;
-  onClick: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
   type?: "button" | "submit" | "reset";
 }

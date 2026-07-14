@@ -11,6 +11,9 @@ interface PatientGridProps {
   onEdit: (patient: Patient) => void;
 }
 
+const GRID_ITEM_DELAY = 20;
+const GRID_MAX_DELAY = 200;
+
 export function PatientGrid({
   patients,
   isFavorite,
@@ -21,19 +24,29 @@ export function PatientGrid({
 }: PatientGridProps) {
   return (
     <Grid>
-      {patients.map((patient) => (
-        <div key={patient.id}>
-          <PatientCard
+      {patients.map((patient, index) => {
+        const animationDelay = Math.min(
+          index * GRID_ITEM_DELAY,
+          GRID_MAX_DELAY,
+        );
+
+        return (
+          <div
             key={patient.id}
-            ref={register(patient.id)}
-            patient={patient}
-            isFavorite={isFavorite(patient.id)}
-            highlighted={highlightedId === patient.id}
-            onToggleFavorite={onToggleFavorite}
-            onEdit={onEdit}
-          />
-        </div>
-      ))}
+            className="animate-grid-enter"
+            style={{ animationDelay: `${animationDelay}ms` }}
+          >
+            <PatientCard
+              ref={register(patient.id)}
+              patient={patient}
+              isFavorite={isFavorite(patient.id)}
+              highlighted={highlightedId === patient.id}
+              onToggleFavorite={onToggleFavorite}
+              onEdit={onEdit}
+            />
+          </div>
+        );
+      })}
     </Grid>
   );
 }

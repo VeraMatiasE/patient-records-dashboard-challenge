@@ -4,17 +4,22 @@ interface AppHeaderProps {
 
 export function AppHeader({ onAddPatient }: AppHeaderProps) {
   return (
-    <header className="sticky top-0 z-50 bg-primary h-14 flex items-center justify-between px-6 flex-shrink-0">
+    <header className="sticky top-0 z-50 flex h-14 flex-shrink-0 items-center justify-between border-b border-white/10 bg-primary px-6">
       <div className="flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-        <span className="text-text-inverse font-semibold text-sm select-none">
+        <img
+          src="/Logo.svg"
+          alt="HealthRecords logo"
+          className="h-7 w-7 object-contain"
+        />
+        <span className="select-none text-base font-semibold text-text-inverse">
           HealthRecords
         </span>
       </div>
+
       <button
         type="button"
         onClick={onAddPatient}
-        className="bg-accent-strong hover:bg-accent-hover text-text-inverse text-xs font-medium px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+        className="inline-flex h-9 cursor-pointer items-center rounded-lg bg-accent-strong px-4 text-sm font-medium text-text-inverse transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
       >
         + Add patient
       </button>

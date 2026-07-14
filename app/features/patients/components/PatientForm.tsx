@@ -58,7 +58,7 @@ export function PatientForm({
           type="button"
           onClick={onCancel}
           disabled={saving}
-          className="px-4 py-2 rounded-[var(--radius-button)] border border-border text-sm cursor-pointer"
+          className="px-4 py-2 rounded-[var(--radius-button)] border border-border text-sm text-text-secondary transition-colors hover:bg-surface-hover hover:border-border-hover hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
         >
           Cancel
         </button>
@@ -67,7 +67,7 @@ export function PatientForm({
           type="button"
           onClick={handleSubmit}
           disabled={saving}
-          className="px-4 py-2 rounded-[var(--radius-button)] bg-accent text-white text-sm font-medium cursor-pointer"
+          className="px-4 py-2 rounded-[var(--radius-button)] bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
         >
           {saving ? "Saving..." : "Save"}
         </button>

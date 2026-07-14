@@ -15,7 +15,9 @@ export function FavoriteButton({ isFavorite, onClick }: FavoriteButtonProps) {
       ariaLabel={isFavorite ? "Remove from favorites" : "Add to favorites"}
       onClick={onClick}
       className={
-        isFavorite ? "text-warning" : "text-text-muted hover:text-warning"
+        isFavorite
+          ? "text-warning hover:scale-120"
+          : "text-text-muted hover:text-warning"
       }
     />
   );
