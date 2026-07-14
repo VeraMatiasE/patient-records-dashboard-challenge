@@ -10,6 +10,7 @@ const meta: Meta<typeof AppHeader> = {
   args: {
     onAddPatient: () => {},
   },
+  tags: ["autodocs"],
 };
 
 export default meta;

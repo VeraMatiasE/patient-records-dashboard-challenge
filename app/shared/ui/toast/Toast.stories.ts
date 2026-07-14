@@ -14,6 +14,7 @@ const meta = {
       message: "John Doe was added successfully.",
     },
   },
+  tags: ["autodocs"],
 } satisfies Meta<typeof Toast>;
 
 export default meta;
