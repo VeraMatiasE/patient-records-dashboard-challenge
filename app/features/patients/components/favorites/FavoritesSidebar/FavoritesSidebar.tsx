@@ -1,6 +1,6 @@
 import { EmptyState } from "~/shared/ui/EmptyState";
-import type { Patient } from "../types/patient";
-import { FavoriteItem } from "./FavoriteItem";
+import type { Patient } from "~/features/patients/types/patient";
+import { FavoriteItem } from "../FavoriteItem/FavoriteItem";
 import { Icon } from "~/shared/ui/icons/Icon";
 
 interface FavoritesSidebarProps {

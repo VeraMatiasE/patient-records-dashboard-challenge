@@ -1,6 +1,6 @@
-import { Avatar } from "~/shared/ui/Avatar";
-import { EditButton } from "~/shared/ui/buttons/EditButton";
-import { FavoriteButton } from "~/shared/ui/buttons/FavoriteButton";
+import { Avatar } from "~/shared/ui/avatar/Avatar";
+import { EditButton } from "./EditButton";
+import { FavoriteButton } from "./FavoriteButton";
 import type { Patient } from "../../types/patient";
 
 interface PatientCardHeaderProps {

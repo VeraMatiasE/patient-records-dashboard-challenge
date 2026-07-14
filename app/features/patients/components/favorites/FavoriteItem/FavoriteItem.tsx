@@ -1,4 +1,4 @@
-import { Avatar } from "~/shared/ui/Avatar";
+import { Avatar } from "~/shared/ui/avatar/Avatar";
 import type { Patient } from "~/features/patients/types/patient";
 import { IconButton } from "~/shared/ui/buttons/IconButton";
 import { Icon } from "~/shared/ui/icons/Icon";

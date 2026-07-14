@@ -1,6 +1,6 @@
 import type { Patient } from "~/features/patients/types/patient";
-import { PatientCard } from "./PatientCard/PatientCard";
-import { Grid } from "~/shared/ui/Grid";
+import { PatientCard } from "../patient-card/PatientCard";
+import { Grid } from "~/shared/ui/grid/Grid";
 
 interface PatientGridProps {
   patients: Patient[];

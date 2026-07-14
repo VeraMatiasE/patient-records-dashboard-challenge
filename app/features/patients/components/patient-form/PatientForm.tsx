@@ -1,6 +1,6 @@
-import { Field } from "~/shared/ui/Field";
-import type { PatientFormData } from "../schemas/patient.schema";
-import { usePatientForm } from "../hooks/usePatientForm";
+import { Field } from "~/shared/ui/field/Field";
+import type { PatientFormData } from "../../schemas/patient.schema";
+import { usePatientForm } from "../../hooks/usePatientForm";
 
 interface PatientFormProps {
   initialValues?: PatientFormData;

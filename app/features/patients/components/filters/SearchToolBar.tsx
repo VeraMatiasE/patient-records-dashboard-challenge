@@ -1,6 +1,6 @@
-import { SearchInput } from "~/shared/ui/SearchInput";
+import { SearchInput } from "~/shared/ui/search-input/SearchInput";
 import type { PatientFilter } from "~/features/patients/types/patient";
-import { PatientFilterSelector } from "~/features/patients/components/PatientFilterSelector";
+import { PatientFilterSelector } from "./PatientFilterSelector";
 
 interface SearchToolbarProps {
   search: string;

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { action } from "storybook/actions";
 import { PatientModal } from "./PatientModal";
-import type { Patient } from "../types/patient";
+import type { Patient } from "../../types/patient";
 
 const patient: Patient = {
   id: "1",

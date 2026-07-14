@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ReactNode, TransitionEvent } from "react";
-import { IconButton } from "./buttons/IconButton";
-import { Icon } from "./icons/Icon";
+import { IconButton } from "../buttons/IconButton";
+import { Icon } from "../icons/Icon";
 
 interface ModalProps {
   open: boolean;

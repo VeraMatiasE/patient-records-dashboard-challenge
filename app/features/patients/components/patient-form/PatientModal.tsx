@@ -1,6 +1,6 @@
-import { Modal } from "~/shared/ui/Modal";
-import type { Patient } from "../types/patient";
-import type { PatientFormData } from "../schemas/patient.schema";
+import { Modal } from "~/shared/ui/modal/Modal";
+import type { Patient } from "../../types/patient";
+import type { PatientFormData } from "../../schemas/patient.schema";
 import { PatientForm } from "./PatientForm";
 
 interface PatientModalProps {

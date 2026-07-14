@@ -1,11 +1,11 @@
 import type { Patient, PatientFilter } from "~/features/patients/types/patient";
 import { PatientGrid } from "./PatientGrid";
-import { EmptyState } from "~/shared/ui/EmptyState";
-import { Pagination } from "~/shared/ui/Pagination";
+import { EmptyState } from "~/shared/ui/empty-state/EmptyState";
+import { Pagination } from "~/shared/ui/pagination/Pagination";
 import { SKELETON_COUNT } from "~/shared/constants/skeleton";
-import { Grid } from "~/shared/ui/Grid";
+import { Grid } from "~/shared/ui/grid/Grid";
 import { PatientCardSkeleton } from "./PatientCardSkeleton";
-import { SearchToolbar } from "./SearchToolBar";
+import { SearchToolbar } from "../filters/SearchToolBar";
 
 interface PatientListSectionProps {
   patients: Patient[];

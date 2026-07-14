@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { PatientForm } from "./PatientForm";
-import type { PatientFormData } from "../schemas/patient.schema";
+import type { PatientFormData } from "../../schemas/patient.schema";
 
 const initialValues: PatientFormData = {
   name: "John Doe",

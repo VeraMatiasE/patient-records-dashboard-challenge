@@ -1,6 +1,6 @@
-import { Badge } from "../../../shared/ui/Badge";
-import { SegmentedControl } from "../../../shared/ui/SegmentedControl";
-import { SegmentedControlItem } from "../../../shared/ui/SegmentedControlItem";
+import { Badge } from "~/shared/ui/badge/Badge";
+import { SegmentedControl } from "~/shared/ui/segmented-control/SegmentedControl";
+import { SegmentedControlItem } from "~/shared/ui/segmented-control/SegmentedControlItem";
 
 interface PatientFilterSelectorProps {
   value: "all" | "favorites";

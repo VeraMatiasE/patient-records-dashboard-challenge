@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { FavoritesSidebar } from "./FavoritesSidebar";
-import type { Patient } from "../types/patient";
+import type { Patient } from "~/features/patients/types/patient";
 import { useState } from "react";
 
 const favoritePatients: Patient[] = [

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { PatientListSection } from "./PatientListSection";
-import type { Patient } from "../types/patient";
+import type { Patient } from "../../types/patient";
 
 vi.mock("./PatientGrid", () => ({
   PatientGrid: () => <div data-testid="grid" />,

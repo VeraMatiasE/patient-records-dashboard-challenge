@@ -1,15 +1,15 @@
 import { AppHeader } from "~/shared/layout/AppHeader";
-import { PatientListSection } from "~/features/patients/components/PatientListSection";
+import { PatientListSection } from "../components/patient-list/PatientListSection";
 import { usePatients } from "~/features/patients/hooks/usePatients";
 import { usePagination } from "~/shared/hooks/usePagination";
 import { useCallback, useMemo, useState } from "react";
 import type { Patient } from "../types/patient";
-import { PatientModal } from "../components/PatientModal";
+import { PatientModal } from "../components/patient-form/PatientModal";
 import { useToasts } from "~/shared/hooks/useToasts";
 import { ToastList } from "~/shared/ui/toast/ToastList";
 import type { PatientFormData } from "../schemas/patient.schema";
 import { useFavorites } from "../hooks/useFavorites";
-import { FavoritesSidebar } from "../components/FavoritesSidebar";
+import { FavoritesSidebar } from "../components/favorites/FavoritesSidebar/FavoritesSidebar";
 import { usePatientSearch } from "~/features/patients/hooks/usePatientSearch";
 import { PAGE_SIZE } from "~/shared/constants/pagination";
 import { usePatientNavigator } from "~/features/patients/hooks/usePatientNavigator";

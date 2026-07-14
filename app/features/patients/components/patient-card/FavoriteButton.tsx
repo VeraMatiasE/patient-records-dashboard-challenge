@@ -1,5 +1,5 @@
-import { Icon } from "../icons/Icon";
-import { IconButton } from "./IconButton";
+import { Icon } from "~/shared/ui/icons/Icon";
+import { IconButton } from "~/shared/ui/buttons/IconButton";
 
 interface FavoriteButtonProps {
   isFavorite: boolean;
