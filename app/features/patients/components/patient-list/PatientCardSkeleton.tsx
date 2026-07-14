@@ -2,7 +2,7 @@ import {
   SkeletonCircle,
   SkeletonLine,
   SkeletonBox,
-} from "~/shared/ui/Skeleton";
+} from "~/shared/ui/skeleton/Skeleton";
 
 export function PatientCardSkeleton() {
   return (

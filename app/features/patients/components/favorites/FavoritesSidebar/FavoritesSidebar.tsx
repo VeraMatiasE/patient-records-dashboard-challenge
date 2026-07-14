@@ -1,4 +1,4 @@
-import { EmptyState } from "~/shared/ui/EmptyState";
+import { EmptyState } from "~/shared/ui/empty-state/EmptyState";
 import type { Patient } from "~/features/patients/types/patient";
 import { FavoriteItem } from "../FavoriteItem/FavoriteItem";
 import { Icon } from "~/shared/ui/icons/Icon";
