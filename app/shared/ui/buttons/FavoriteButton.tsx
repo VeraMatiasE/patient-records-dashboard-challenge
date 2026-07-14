@@ -1,3 +1,6 @@
+import { Icon } from "../icons/Icon";
+import { IconButton } from "./IconButton";
+
 interface FavoriteButtonProps {
   isFavorite: boolean;
   onClick: () => void;
@@ -5,15 +8,17 @@ interface FavoriteButtonProps {
 
 export function FavoriteButton({ isFavorite, onClick }: FavoriteButtonProps) {
   return (
-    <button
-      type="button"
+    <IconButton
+      icon={
+        <Icon name={isFavorite ? "starFilled" : "star"} className="h-4 w-4" />
+      }
+      ariaLabel={isFavorite ? "Remove from favorites" : "Add to favorites"}
       onClick={onClick}
-      aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
-      className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors hover:bg-surface-hover cursor-pointer ${
-        isFavorite ? "text-warning" : "text-text-muted hover:text-warning"
-      }`}
-    >
-      {isFavorite ? "★" : "☆"}
-    </button>
+      className={
+        isFavorite
+          ? "text-warning hover:scale-120"
+          : "text-text-muted hover:text-warning"
+      }
+    />
   );
 }

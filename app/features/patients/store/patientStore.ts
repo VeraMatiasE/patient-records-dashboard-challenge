@@ -1,15 +1,16 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { getPatients } from "~/features/patients/api/patientApi";
-import type { Patient } from "~/features/patients/types/patient";
+import type { NewPatient, Patient } from "~/features/patients/types/patient";
 
 interface PatientStore {
   patients: Patient[];
   status: "idle" | "loading" | "success" | "error";
   error: string | null;
+  nextId: number;
 
   loadPatients: () => Promise<void>;
-  addPatient: (patient: Patient) => void;
+  addPatient: (patient: NewPatient) => void;
   updatePatient: (patient: Patient) => void;
   deletePatient: (id: string) => void;
 }
@@ -19,6 +20,7 @@ export const usePatientStore = create<PatientStore>()(
     (set, get) => ({
       patients: [],
       status: "idle",
+      nextId: 1,
       error: null,
 
       loadPatients: async () => {
@@ -32,9 +34,15 @@ export const usePatientStore = create<PatientStore>()(
 
           const patients = await getPatients();
 
+          const maxId = Math.max(
+            0,
+            ...patients.map((patient) => Number(patient.id)),
+          );
+
           set({
             patients,
             status: "success",
+            nextId: maxId + 1,
           });
         } catch (error) {
           set({
@@ -45,9 +53,18 @@ export const usePatientStore = create<PatientStore>()(
       },
 
       addPatient: (patient) =>
-        set((state) => ({
-          patients: [...state.patients, patient],
-        })),
+        set((state) => {
+          const newPatient = {
+            ...patient,
+            id: String(state.nextId),
+            createdAt: new Date().toISOString(),
+          };
+
+          return {
+            patients: [...state.patients, newPatient],
+            nextId: state.nextId + 1,
+          };
+        }),
 
       updatePatient: (updatedPatient) =>
         set((state) => ({
